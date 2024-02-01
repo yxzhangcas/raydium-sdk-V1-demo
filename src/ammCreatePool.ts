@@ -62,7 +62,7 @@ type TestTxInputInfo = LiquidityPairTargetInfo &
     wallet: Keypair
   }
 
-async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] }> {
+export async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] }> {
   // -------- step 1: make instructions --------
   const initPoolInstructionResponse = await Liquidity.makeCreatePoolV4InstructionV2Simple({
     connection,
@@ -85,7 +85,8 @@ async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] 
     associatedOnly: false,
     checkCreateATAOwner: true,
     makeTxVersion,
-    feeDestinationId: new PublicKey('7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5'), // only mainnet use this
+    // feeDestinationId: new PublicKey('7YttLkHDoNj9wyDur5pM1ejNaAvT9X4eqaYcHQqtj2G5'), // only mainnet use this
+    feeDestinationId: new PublicKey('3XMrhbv989VxAMi3DErLV9eJht1pHppW5LbKxe9fkEFR'), // only devnet use this
   })
 
   return { txids: await buildAndSendTx(initPoolInstructionResponse.innerTransactions) }

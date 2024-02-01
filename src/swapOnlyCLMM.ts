@@ -34,7 +34,7 @@ type TestTxInputInfo = {
   wallet: Keypair
 }
 
-async function swapOnlyCLMM(input: TestTxInputInfo) {
+export async function swapOnlyCLMM(input: TestTxInputInfo) {
   // -------- pre-action: fetch Clmm pools info --------
   const clmmPools: ApiClmmPoolsItem[] = [await formatClmmKeysById(input.targetPool)]
   const { [input.targetPool]: clmmPoolInfo } = await Clmm.fetchMultiplePoolInfos({
@@ -89,6 +89,7 @@ async function swapOnlyCLMM(input: TestTxInputInfo) {
 async function howToUse() {
   const inputToken = DEFAULT_TOKEN.USDC // USDC
   const outputToken = DEFAULT_TOKEN.RAY // RAY
+  // https://solscan.io/account/61R1ndXxvsWXXkWSyNkCxnzwd3zUNB8Q2ibmkiLPC8ht [24H交易量有307K]
   const targetPool = '61R1ndXxvsWXXkWSyNkCxnzwd3zUNB8Q2ibmkiLPC8ht' // USDC-RAY pool
   const inputTokenAmount = new TokenAmount(inputToken, 100)
   const slippage = new Percent(1, 100)
@@ -106,3 +107,5 @@ async function howToUse() {
     console.log('txids', txids)
   })
 }
+
+howToUse();

@@ -8,7 +8,7 @@ import {
   Token,
   TokenAmount,
 } from '@raydium-io/raydium-sdk';
-import { Keypair } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, Keypair, PublicKey } from '@solana/web3.js';
 
 import {
   connection,
@@ -26,26 +26,40 @@ type WalletTokenAccounts = Awaited<ReturnType<typeof getWalletTokenAccount>>
 type TestTxInputInfo = {
   outputToken: Token
   targetPool: string
-  inputTokenAmount: TokenAmount
+  inputToken: Token
   slippage: Percent
   walletTokenAccounts: WalletTokenAccounts
   wallet: Keypair
 }
 
-async function swapOnlyAmm(input: TestTxInputInfo) {
+export async function swapOnlyAmm(input: TestTxInputInfo) {
   // -------- pre-action: get pool info --------
   const targetPoolInfo = await formatAmmKeysById(input.targetPool)
   assert(targetPoolInfo, 'cannot find the target pool')
+  // console.log(targetPoolInfo);
   const poolKeys = jsonInfo2PoolKeys(targetPoolInfo) as LiquidityPoolKeys
+  // console.log(poolKeys);
 
+  const poolInfo = await Liquidity.fetchInfo({ connection, poolKeys });
+  // console.log(poolInfo);
+  console.log(poolInfo.baseReserve.toString())
+  console.log(poolInfo.quoteReserve.toString())
+  console.log(poolInfo.lpSupply.toString())
+  const amount = Math.min(
+    LAMPORTS_PER_SOL * 0.01, 
+    parseInt(poolInfo.quoteReserve.toString().slice(0, -4)),
+  );
+  console.log(amount)
+  const inputTokenAmount = new TokenAmount(input.inputToken, amount);
   // -------- step 1: coumpute amount out --------
   const { amountOut, minAmountOut } = Liquidity.computeAmountOut({
     poolKeys: poolKeys,
     poolInfo: await Liquidity.fetchInfo({ connection, poolKeys }),
-    amountIn: input.inputTokenAmount,
+    amountIn: inputTokenAmount,
     currencyOut: input.outputToken,
     slippage: input.slippage,
   })
+  // console.log(amountOut, minAmountOut);
 
   // -------- step 2: create instructions by SDK function --------
   const { innerTransactions } = await Liquidity.makeSwapInstructionSimple({
@@ -55,29 +69,36 @@ async function swapOnlyAmm(input: TestTxInputInfo) {
       tokenAccounts: input.walletTokenAccounts,
       owner: input.wallet.publicKey,
     },
-    amountIn: input.inputTokenAmount,
+    amountIn: inputTokenAmount,
     amountOut: minAmountOut,
     fixedSide: 'in',
     makeTxVersion,
   })
+  // console.log(innerTransactions);
 
   console.log('amountOut:', amountOut.toFixed(), '  minAmountOut: ', minAmountOut.toFixed())
 
-  return { txids: await buildAndSendTx(innerTransactions) }
+  return { txids: '---0---'}
+  // return { txids: await buildAndSendTx(innerTransactions) }
 }
 
 async function howToUse() {
-  const inputToken = DEFAULT_TOKEN.USDC // USDC
-  const outputToken = DEFAULT_TOKEN.RAY // RAY
-  const targetPool = 'EVzLJhqMtdC1nPmz8rNd6xGfVjDPxpLZgq7XJuNfMZ6' // USDC-RAY pool
-  const inputTokenAmount = new TokenAmount(inputToken, 10000)
+  const inputToken = new Token(
+    new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'), 
+    new PublicKey('So11111111111111111111111111111111111111112'), 9, 'WSOL', 'WSOL');
+  const outputToken = new Token(
+    new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA'), 
+    new PublicKey('J8UjmiSJASyKLTgwcvB6kTZyF9xDkvBEmU8yyNr12oh9'), 4, 'ORANG', 'ORANG');
+  const targetPool = '6V479JYXTtxDoxgC3nANqKVWsCCTUXFinJn84kqNAv7B';
+  const inputTokenAmount = new TokenAmount(inputToken, 1000000)
   const slippage = new Percent(1, 100)
   const walletTokenAccounts = await getWalletTokenAccount(connection, wallet.publicKey)
+  // console.log(walletTokenAccounts);
 
   swapOnlyAmm({
     outputToken,
     targetPool,
-    inputTokenAmount,
+    inputToken,
     slippage,
     walletTokenAccounts,
     wallet: wallet,
@@ -86,3 +107,5 @@ async function howToUse() {
     console.log('txids', txids)
   })
 }
+
+howToUse();

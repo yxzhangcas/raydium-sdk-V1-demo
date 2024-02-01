@@ -1,0 +1,25 @@
+---- 3WGurgcLEKEThSUKsCZSWySdk5JQfN6LQ3xzDSDpGMFih3UgMLzr7xW7g6eXpjVwE2kAFxBc9QxgX7kBC6Kr6rZF
+---- 3WGurgcLEKEThSUKsCZSWySdk5JQfN6LQ3xzDSDpGMFih3UgMLzr7xW7g6eXpjVwE2kAFxBc9QxgX7kBC6Kr6rZF CX6AZLMTMW69mMAxYeLAmJYfs1vuYwPKefrcCgxPyrgX 5000000000 1706945562
+Error:  get id info error 
+    at /root/github/raydium-sdk-V1-demo/src/formatAmmKeysById.ts:17:31
+    at Generator.next (<anonymous>)
+    at fulfilled (/root/github/raydium-sdk-V1-demo/src/formatAmmKeysById.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+---- 4TeqUrE6YPcgvV6MgrKxP9pn5bqCWvrDFcK2LXFtkZr6w3mhXhF3moUXHh3HuzqoK84paiJFcmfdBSoMqhHsastp
+---- 4TeqUrE6YPcgvV6MgrKxP9pn5bqCWvrDFcK2LXFtkZr6w3mhXhF3moUXHh3HuzqoK84paiJFcmfdBSoMqhHsastp DMQyzkQtdn1kNCMQxLCu8f7VsSnPcx52aMzUBuEftPA5 10000000000 1706945680
+---- DMQyzkQtdn1kNCMQxLCu8f7VsSnPcx52aMzUBuEftPA5 10 FpxMsZGuofE52Fx41EJPXZrJXd2rmHr2dtSu88SKChfu 83666002653407 83665002653407 1706945680 1706945682 2
+---- DMQyzkQtdn1kNCMQxLCu8f7VsSnPcx52aMzUBuEftPA5 10 FpxMsZGuofE52Fx41EJPXZrJXd2rmHr2dtSu88SKChfu 83666002653407 83665002653407 1706945680 1706945692 12
+---- DMQyzkQtdn1kNCMQxLCu8f7VsSnPcx52aMzUBuEftPA5 10 FpxMsZGuofE52Fx41EJPXZrJXd2rmHr2dtSu88SKChfu 83666002653407 83665002653407 1706945680 1706945703 23
+/root/github/raydium-sdk-V1-demo/node_modules/@raydium-io/raydium-sdk/src/common/logger.ts:213
+    const error: any = new Error(message)
+                       ^
+Error: rpc simulateTransaction error
+    at Logger.makeError (/root/github/raydium-sdk-V1-demo/node_modules/@raydium-io/raydium-sdk/src/common/logger.ts:213:24)
+    at Logger.throwError (/root/github/raydium-sdk-V1-demo/node_modules/@raydium-io/raydium-sdk/src/common/logger.ts:225:16)
+    at /root/github/raydium-sdk-V1-demo/node_modules/@raydium-io/raydium-sdk/src/common/web3.ts:267:21
+    at Generator.next (<anonymous>)
+    at fulfilled (/root/github/raydium-sdk-V1-demo/node_modules/@raydium-io/raydium-sdk/lib/cjs/common/web3.js:6:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  reason: 'failed to simulate for instructions',
+  code: 'RPC_ERROR'
+}

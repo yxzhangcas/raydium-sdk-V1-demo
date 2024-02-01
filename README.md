@@ -31,3 +31,11 @@ you can simply combine the command to run a demo, e.g
 
 `yarn clean && yarn build && yarn start js/src/stakeFarm.js`
 
+
+
+PS D:\GitHub\raydium-sdk-V1-demo> npm install -g ts-node
+PS D:\GitHub\raydium-sdk-V1-demo> npm install --save @raydium-io/raydium-sdk
+PS D:\GitHub\raydium-sdk-V1-demo> npm install --save @solana/spl-token
+
+SOL: So11111111111111111111111111111111111111112
+RAY: 4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R
