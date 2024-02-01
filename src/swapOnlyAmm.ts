@@ -32,7 +32,7 @@ type TestTxInputInfo = {
   wallet: Keypair
 }
 
-async function swapOnlyAmm(input: TestTxInputInfo) {
+export async function swapOnlyAmm(input: TestTxInputInfo) {
   // -------- pre-action: get pool info --------
   const targetPoolInfo = await formatAmmKeysById(input.targetPool)
   assert(targetPoolInfo, 'cannot find the target pool')

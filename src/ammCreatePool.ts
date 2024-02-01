@@ -62,7 +62,7 @@ type TestTxInputInfo = LiquidityPairTargetInfo &
     wallet: Keypair
   }
 
-async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] }> {
+export async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] }> {
   // -------- step 1: make instructions --------
   const initPoolInstructionResponse = await Liquidity.makeCreatePoolV4InstructionV2Simple({
     connection,
@@ -94,14 +94,17 @@ async function ammCreatePool(input: TestTxInputInfo): Promise<{ txids: string[] 
 async function howToUse() {
   const baseToken = DEFAULT_TOKEN.USDC // USDC
   const quoteToken = DEFAULT_TOKEN.RAY // RAY
-  const targetMarketId = Keypair.generate().publicKey
+  const targetMargetId = Keypair.generate().publicKey
+  console.log(targetMargetId);
   const addBaseAmount = new BN(10000) // 10000 / 10 ** 6,
   const addQuoteAmount = new BN(10000) // 10000 / 10 ** 6,
   const startTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7 // start from 7 days later
   const walletTokenAccounts = await getWalletTokenAccount(connection, wallet.publicKey)
+  console.log(walletTokenAccounts);
 
   /* do something with start price if needed */
   const startPrice = calcMarketStartPrice({ addBaseAmount, addQuoteAmount })
+  console.log(startPrice);
 
   /* do something with market associated pool keys if needed */
   const associatedPoolKeys = getMarketAssociatedPoolKeys({
@@ -109,6 +112,7 @@ async function howToUse() {
     quoteToken,
     targetMarketId,
   })
+  console.log(associatedPoolKeys);
 
   ammCreatePool({
     startTime,

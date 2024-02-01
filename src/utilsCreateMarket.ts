@@ -31,7 +31,8 @@ export async function createMarket(input: TestTxInputInfo) {
     dexProgramId: PROGRAMIDS.OPENBOOK_MARKET,
     makeTxVersion,
   })
-
+  console.log('createMarket', createMarketInstruments.innerTransactions[0].instructions);
+  console.log('createMarket', createMarketInstruments.innerTransactions[1].instructions);
   return { txids: await buildAndSendTx(createMarketInstruments.innerTransactions) }
 }
 

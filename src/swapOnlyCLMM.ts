@@ -34,7 +34,7 @@ type TestTxInputInfo = {
   wallet: Keypair
 }
 
-async function swapOnlyCLMM(input: TestTxInputInfo) {
+export async function swapOnlyCLMM(input: TestTxInputInfo) {
   // -------- pre-action: fetch Clmm pools info --------
   const clmmPools: ApiClmmPoolsItem[] = [await formatClmmKeysById(input.targetPool)]
   const { [input.targetPool]: clmmPoolInfo } = await Clmm.fetchMultiplePoolInfos({

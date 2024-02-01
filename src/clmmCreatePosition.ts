@@ -121,4 +121,4 @@ async function howToUse() {
   })
 }
 
-howToUse()
+// howToUse()

@@ -31,7 +31,9 @@ export async function sendTx(
 ): Promise<string[]> {
   const txids: string[] = [];
   for (const iTx of txs) {
+    // console.log('sendTx', iTx);
     if (iTx instanceof VersionedTransaction) {
+      // console.log('sendTx', iTx.message.compiledInstructions);
       iTx.sign([payer]);
       txids.push(await connection.sendTransaction(iTx, options));
     } else {
@@ -60,7 +62,7 @@ export async function buildAndSendTx(innerSimpleV0Transaction: InnerSimpleV0Tran
     innerTransactions: innerSimpleV0Transaction,
     addLookupTableInfo: addLookupTableInfo,
   })
-
+  // console.log('buildAndSendTx', willSendTx);
   return await sendTx(connection, wallet, willSendTx, options)
 }
 
