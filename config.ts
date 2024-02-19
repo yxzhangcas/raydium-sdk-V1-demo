@@ -52,7 +52,6 @@ export const POOLS_TO_SELL = {}
 export const rpcUrl: string = DEVNET_URL;  // TODO: [ MAINNET_URL | DEVNET_URL ]
 export const rpcToken: string | undefined = undefined
 
-<<<<<<< HEAD
 export const wallet = WALLET; // modified
 
 export const connection = CONNECTION_DEVNET; // TODO: [ CONNECTION_MAINNET | CONNECTION_DEVNET ]
