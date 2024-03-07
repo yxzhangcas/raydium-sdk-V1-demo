@@ -67,6 +67,8 @@ async function swapOnlyAmm(input: TestTxInputInfo) {
 }
 
 async function howToUse() {
+  const before = Date.now();
+
   const inputToken = DEFAULT_TOKEN.WSOL // SOL
   const outputToken = DEFAULT_TOKEN.RAY // RAY
   const targetPool = 'AVs9TA4nWDzfPJE9gGVNJMVhcQy3V9PGazuz33BfG2RA' // SOL-RAY pool
@@ -74,17 +76,19 @@ async function howToUse() {
   const slippage = new Percent(1, 100)
   const walletTokenAccounts = await getWalletTokenAccount(connection, wallet.publicKey)
 
-  swapOnlyAmm({
+  const res = await swapOnlyAmm({
     outputToken,
     targetPool,
     inputTokenAmount,
     slippage,
     walletTokenAccounts,
     wallet: wallet,
-  }).then(({ txids }) => {
-    /** continue with txids */
-    console.log('txids', txids)
-  })
+  });
+  console.log(res);
+  console.log(Date.now() - before);
+  return res;
 }
 
-howToUse();
+if (process.argv[process.argv.length - 1] === 'testSwapOnlyAmm') {
+  howToUse();
+}

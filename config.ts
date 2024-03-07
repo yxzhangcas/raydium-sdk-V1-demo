@@ -16,8 +16,8 @@ import {
 } from '@solana/web3.js';
 import bs58 from 'bs58';
 
-// export const rpcUrl: string = 'https://evocative-multi-dew.solana-mainnet.quiknode.pro/a3fd84de3e382511fb618ff9abdcfb84a7ba5022/';
-export const rpcUrl: string = clusterApiUrl('mainnet-beta');
+export const rpcUrl: string = 'https://evocative-multi-dew.solana-mainnet.quiknode.pro/a3fd84de3e382511fb618ff9abdcfb84a7ba5022/';
+// export const rpcUrl: string = clusterApiUrl('mainnet-beta');
 export const rpcToken: string | undefined = undefined
 
 const PUBLIC_KEY = bs58.decode('EosiWR9dEftULFm4NdT5aSHjuutpg9wikMXtEWty5C4S');
