@@ -67,9 +67,9 @@ async function swapOnlyAmm(input: TestTxInputInfo) {
 }
 
 async function howToUse() {
-  const inputToken = DEFAULT_TOKEN.USDC // USDC
+  const inputToken = DEFAULT_TOKEN.WSOL // SOL
   const outputToken = DEFAULT_TOKEN.RAY // RAY
-  const targetPool = 'EVzLJhqMtdC1nPmz8rNd6xGfVjDPxpLZgq7XJuNfMZ6' // USDC-RAY pool
+  const targetPool = 'AVs9TA4nWDzfPJE9gGVNJMVhcQy3V9PGazuz33BfG2RA' // SOL-RAY pool
   const inputTokenAmount = new TokenAmount(inputToken, 10000)
   const slippage = new Percent(1, 100)
   const walletTokenAccounts = await getWalletTokenAccount(connection, wallet.publicKey)
@@ -86,3 +86,5 @@ async function howToUse() {
     console.log('txids', txids)
   })
 }
+
+howToUse();

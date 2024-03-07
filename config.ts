@@ -9,17 +9,31 @@ import {
   TxVersion,
 } from '@raydium-io/raydium-sdk';
 import {
+  clusterApiUrl,
   Connection,
   Keypair,
   PublicKey,
 } from '@solana/web3.js';
+import bs58 from 'bs58';
 
-export const rpcUrl: string = 'https://xxx.xxx.xxx/'
+// export const rpcUrl: string = 'https://evocative-multi-dew.solana-mainnet.quiknode.pro/a3fd84de3e382511fb618ff9abdcfb84a7ba5022/';
+export const rpcUrl: string = clusterApiUrl('mainnet-beta');
 export const rpcToken: string | undefined = undefined
 
-export const wallet = Keypair.fromSecretKey(Buffer.from('<YOUR_WALLET_SECRET_KEY>'))
+const PUBLIC_KEY = bs58.decode('EosiWR9dEftULFm4NdT5aSHjuutpg9wikMXtEWty5C4S');
+const SECRET_KEY = new Uint8Array([
+  43, 186, 48, 89, 86, 42, 212, 13,
+  9, 121, 53, 139, 122, 211, 17, 33,
+  200, 46, 134, 135, 195, 209, 166, 215,
+  183, 191, 152, 196, 89, 254, 64, 183,
+  205, 41, 253, 218, 175, 182, 160, 103,
+  23, 66, 94, 177, 53, 57, 213, 95,
+  130, 236, 231, 17, 96, 122, 238, 203,
+  179, 243, 198, 116, 223, 199, 185, 19]);
 
-export const connection = new Connection('<YOUR_RPC_URL>');
+export const wallet = Keypair.fromSecretKey(SECRET_KEY)
+
+export const connection = new Connection(rpcUrl);
 
 export const PROGRAMIDS = MAINNET_PROGRAM_ID;
 
