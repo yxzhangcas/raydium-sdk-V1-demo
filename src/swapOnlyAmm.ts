@@ -68,6 +68,7 @@ async function swapOnlyAmm(input: TestTxInputInfo) {
 
 async function howToUse() {
   const before = Date.now();
+  console.log('before', before, new Date().toLocaleString());
 
   const inputToken = DEFAULT_TOKEN.WSOL // SOL
   const outputToken = DEFAULT_TOKEN.RAY // RAY
@@ -85,7 +86,11 @@ async function howToUse() {
     wallet: wallet,
   });
   console.log(res);
-  console.log(Date.now() - before);
+
+  const after = Date.now();
+  console.log('after', after, new Date().toLocaleString());
+  console.log('spend', after - before);
+  
   return res;
 }
 
